@@ -1,0 +1,16 @@
+---
+import Count from "../components/Count";
+import Layout from "../layouts/Layout.astro";
+import astroImage from "../assets/astro.svg";
+import Image from "astro/components/Image.astro";
+
+const str = 2;
+---
+
+<Layout title="main page">
+  <div class="flex flex-col items-center justify-center p-[10px]">
+    <h1 class="font-bold text-[72px] my-[40px]">Main Page</h1>
+    <Image class="mb-[50px]" src={astroImage} alt="AStro image" />
+    <Count client:load />
+  </div>
+</Layout>

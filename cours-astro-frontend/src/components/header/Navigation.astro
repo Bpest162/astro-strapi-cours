@@ -1,0 +1,25 @@
+---
+import { links } from "../../constans/links";
+const currentPath = Astro.url.pathname;
+---
+
+<ul class="flex list-none">
+  {
+    links.map((link) => {
+      return (
+        <li class="mr-5">
+          <a
+            href={link.url}
+            class={
+              currentPath === link.url
+                ? "font-semibold text-white underline"
+                : "font-semibold text-white no-underline hover:underline"
+            }
+          >
+            {link.title}
+          </a>
+        </li>
+      );
+    })
+  }
+</ul>
