@@ -20,7 +20,7 @@ const ProductCard = ({ product }: PropductCardProps) => {
       </div>
       <button onClick={toggle} className="border p-2 bg-blue-400 w-[100%] mb-2">Description</button>
       {details && <p className="text-lg font-normal">{product.description}</p>}
-      <a className="border p-2 bg-blue-400 w-[100%] text-center" href={`/product/${product.id}`}>
+      <a className="border p-2 bg-blue-400 w-[100%] text-center" href={`/products/${product.id}`}>
             Product details
           </a>
     </div>

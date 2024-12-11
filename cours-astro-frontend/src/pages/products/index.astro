@@ -1,32 +1,19 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import ProductCard from "../../components/ProductCard";
-import type { IProduct } from "../../types/product";
+//import { products } from "../../utils/products"; with fetch 
+import { fetchProducts } from "../../services/http/api"; //with axios
 
-const response = await fetch("http://127.0.0.1:1337/api/products?populate=*");
-if (!response.ok) {
-  throw new Error(`Error ${response.status}: ${response.statusText}`);
-}
+const newProducts = await fetchProducts(); // get products 
 
-// Адаптация данных Strapi к ожидаемой структуре
-const rawData = await response.json();
-const products = rawData.data.map((item: any) => ({
-  id: item.id,
-  name: item.name,
-  price: item.price,
-  description: item.description,
-  createdAt: item.createdAt,
-  image: item.image,
-})) as IProduct[];
+//console.log(newProducts);
 ---
 
 <Layout title="products page">
   <div class="flex flex-col items-center">
     <h1 class="font-bold text-[72px] mb-[40px]">Products Page</h1>
     <div class="grid grid-cols-3 mb-[30px] gap-[20px] content-around w-[80%]">
-        {products.map((product) => (
-            <ProductCard product={product} client:load/>
-        ))}
+      {newProducts.map((product) => <ProductCard product={product} client:load />)}
     </div>
   </div>
 </Layout>

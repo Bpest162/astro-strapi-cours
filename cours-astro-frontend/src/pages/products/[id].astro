@@ -1,0 +1,35 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { fetchProducts } from "../../services/http/api";
+import Image from "astro/components/Image.astro";
+
+// Функция для генерации путей
+export async function getStaticPaths() {
+  const products = await fetchProducts(); // Получаем список продуктов
+
+  // Возвращаем массив путей
+  return products.map((product) => ({
+    params: { id: product.id.toString() },
+    props: { product },
+  }));
+}
+
+const { id } = Astro.params;
+const { product } = Astro.props;
+---
+
+<Layout title={`product${id}`}>
+  <div class="flex justify-center items-center">
+    <div class="flex flex-col gap-[20px] items-center w-[400px]">
+      <h1 class="font-bold text-[36px]">{product.name}</h1>
+      <p class="text-lg">Цена: {product.price}₽</p>
+      <p class="text-sm">{product.description}</p>
+      <Image
+        inferSize
+        class="w-[300px] h-[300px] mb-3 object-contain"
+        src={`http://127.0.0.1:1337${product.image.url}`}
+        alt=""
+      />
+    </div>
+  </div>
+</Layout>
