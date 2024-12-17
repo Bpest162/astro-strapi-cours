@@ -1,0 +1,26 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { blogs } from "../../utils/blog";
+import BlogCard from "../../components/BlogCard";
+
+//console.log(blogs);
+---
+
+<Layout title="about page">
+  <div class="flex items-center justify-center flex-col">
+    <h1 class="font-bold text-[72px] mb-[40px]">Blog Page</h1>
+    {
+      blogs && blogs.length > 0 ? (
+        <div class="grid grid-cols-2 mb-[30px] gap-[20px] content-around w-[80%]">
+          {blogs.map((blog) => (
+            <BlogCard blog={blog} />
+          ))}
+        </div>
+      ) : (
+        <p class="text-center text-lg text-red-600">
+          Data is temporarily unavailable or there is a problem with the server
+        </p>
+      )
+    }
+  </div>
+</Layout>

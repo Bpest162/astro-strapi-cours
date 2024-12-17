@@ -1,6 +1,6 @@
 export const links = [
   { url: "/", title: "Home" },
   { url: "/products", title: "Products" },
-  { url: "/about", title: "About" },
+  { url: "/blogs", title: "Blog" },
   { url: "/contacts", title: "Contacts" },
 ];

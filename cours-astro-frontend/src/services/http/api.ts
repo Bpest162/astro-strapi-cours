@@ -32,31 +32,9 @@ export const fetchProducts = async (): Promise<IProduct[]> => {
 
   } catch (error) {
     console.error("Something went wrong:", error);
-    throw error;
+
+    return [];
   }
 };
 
-export const fetchProductById = async (id: string) => { //получение продукта по ID 
-    try {
-      const response = await apiClient.get(`${PRODUCTS_URL}/${id}`/* , {
-        params: { populate: "*" },
-      } */);
-  
-      if (response.status !== 200) {
-        throw new Error(`Error ${response.status}: ${response.statusText}`);
-      }
-  
-      const item = response.data.data;
-      return {
-        id: item.id,
-        name: item.name,
-        price: item.price,
-        description: item.description,
-        createdAt: item.createdAt,
-        image: item.image,
-      };
-    } catch (error) {
-      console.error("Something went wrong:", error);
-      throw error;
-    }
-  };
+

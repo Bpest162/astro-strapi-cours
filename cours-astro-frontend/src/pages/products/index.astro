@@ -1,19 +1,31 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import ProductCard from "../../components/ProductCard";
-//import { products } from "../../utils/products"; with fetch 
+//import { products } from "../../utils/products"; with fetch
 import { fetchProducts } from "../../services/http/api"; //with axios
 
-const newProducts = await fetchProducts(); // get products 
+const newProducts = await fetchProducts(); // get products
 
-//console.log(newProducts);
 ---
 
 <Layout title="products page">
   <div class="flex flex-col items-center">
     <h1 class="font-bold text-[72px] mb-[40px]">Products Page</h1>
     <div class="grid grid-cols-3 mb-[30px] gap-[20px] content-around w-[80%]">
-      {newProducts.map((product) => <ProductCard product={product} client:load />)}
+      {
+        newProducts && newProducts.length > 0 ? (
+          <div class="grid grid-cols-3 mb-[30px] gap-[20px] content-around w-[80%]">
+            {newProducts.map((product) => (
+              <ProductCard product={product} client:load />
+            ))}
+          </div>
+        ) : (
+          <p class="text-center text-lg text-red-600">
+            Data is temporarily unavailable or there is a problem with the
+            server
+          </p>
+        )
+      }
     </div>
   </div>
 </Layout>
